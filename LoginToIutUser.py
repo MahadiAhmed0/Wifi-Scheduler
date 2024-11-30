@@ -43,7 +43,12 @@ for student in students:
     fetch_user_data(student, student_usage)
 
 if student_usage:
-    min_student = min(student_usage, key=student_usage.get)
-    print(f"Student with minimum usage is {min_student} with {student_usage[min_student]} minutes.")
+    min_usage = min(student_usage.values())
+    min_students = [student for student, usage in student_usage.items() if usage == min_usage]
+    
+    if len(min_students) > 1:
+        print(f"Students with minimum usage are: {', '.join(min_students)} with {min_usage} minutes each.")
+    else:
+        print(f"Student with minimum usage is {min_students[0]} with {min_usage} minutes.")
 else:
     print("No student data found.")
